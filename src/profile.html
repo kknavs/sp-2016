@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="description" content="TO-DO list, planner">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>doToDo Login</title>
+    <title>doToDo Profile</title>
 </head>
 <body>
 <div class="header-wrapper">
@@ -12,14 +12,15 @@
 
 
         <!-- Logo -->
-        <a href="index.html" class="logo">
+        <a href="home.html" class="logo">
             <span class="logo"><img src="images/logo.svg" alt="" /></span>
         </a>
 
         <!-- Nav -->
         <nav>
             <ul>
-                <li><a href="index.html">Meet doToDo</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
             </ul>
         </nav>
 
@@ -31,18 +32,17 @@
     <div id="main">
         <div class="container">
             <form>
-                <p class="contact"><label for="email">Email:</label></p>
-                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
-                <p class="contact"><label for="password">Password:</label></p>
+                <p class="contact"><label for="password">Enter new password:</label></p>
                 <input type="password" id="password" name="password" required="" type="text" pattern=".{5,}" title="5 characters minimum">
+                <p class="contact"><label for="repassword">Confirm your new password:</label></p>
+                <input type="password" id="repassword" name="password" required="" type="text" pattern=".{5,}" title="5 characters minimum">
                 <br>
-                <input class="button" name="submit" id="submit"  value="Login" type="submit">
+                <input class="button" name="submit" id="submit"  value="Change password" type="submit">
             </form>
 
         </div>
     </div>
 </div>
-
 
 </body>
 </html>
