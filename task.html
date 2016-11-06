@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="TO-DO list, planner">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>doToDo Task</title>
+</head>
+<body>
+<div class="header-wrapper">
+    <header id="header">
+
+
+        <!-- Logo -->
+        <a href="home.html" class="logo">
+            <span class="logo"><img src="images/logo.svg" alt="" /></span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+
+    </header>
+</div>
+
+<div id="page-wrapper">
+    <div id="main">
+        <div class="container">
+
+            <form>
+                <p class="contact"><label for="title">Title:</label></p>
+                <input type="text" id="title" name="title" required=""  pattern=".{3,}" title="3 characters minimum">
+                <p class="contact"><label for="description">Description:</label></p>
+                <textarea id="description" name="description" required="" ></textarea>
+                <br>
+                <p class="contact"><label for="priority">Set priority for task:</label></p>
+                <select name="priority" id="priority">
+                    <option value="1">Do it now (urgent & important)</option>
+                    <option value="2">Delegate (urgent, but not important)</option>
+                    <option value="3">Decide (important, but not urgent)</option>
+                    <option value="4">Do it later (not important, not urgent)</option>
+                </select>
+                <p class="contact"><label for="category">Set category (optional):</label></p>
+                <select name="category" id="category">
+                    <option value="none">none</option>
+                    <option value="work">work</option>
+                    <option value="social">social</option>
+                </select>
+                <p class="contact"><label for="newCategory">Add task in new category (optional):</label></p>
+                <input type="text" id="newCategory" placeholder="Name of new category" name="newCategory" >
+                <br><br>
+                <input class="button" name="submitTask" id="submitTask"  value="Save task" type="submit">
+                <input class="button" name="cancel" id="cancel"  value="Cancel" type="button">
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
