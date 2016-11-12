@@ -1,0 +1,93 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+#header-wrapper {
+    border-bottom: solid 1px #272d30;
+    box-shadow: inset 0px -1px 0px 0px #51575a;
+}
+
+/* Header */
+
+#header {
+    min-height: 155px;
+    position: relative;
+}
+
+
+#header nav {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    font-weight: 200;
+}
+
+#header nav li{
+    list-style-type:none;
+    margin-left: 60px;
+}
+
+#header nav a {
+    color: #c6c8c8;
+    text-decoration: none;
+    font-size: 1.4em;
+    outline: 0;
+}
+
+#header nav a:hover {
+    color: #f6f8f8;
+}
+
+
+#header .logo img{
+    height: 120px;
+    position: absolute;
+    left: 0;
+    bottom: 23px;
+
+
+}
+
+.row {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0px 0 -1px -20px;
+}
+
+.row > * {
+    float: left;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+}
+
+@media screen and (min-width: 737px) {
+    .container {
+        width: 1200px;
+    }
+}
+
+@media screen and (min-width: 737px) and (max-width: 1200px) {
+    .container {
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .container {
+        width: 100% !important;
+    }
+
+}

@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="description" content="TO-DO list, planner">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="css/main.css">
     <title>doToDo Register</title>
 </head>
 <body>
-<div class="header-wrapper">
-    <header id="header">
+<div id="page-wrapper">
+<div id="header-wrapper">
+    <header id="header" class="container">
+        <div class="row">
 
 
         <!-- Logo -->
@@ -17,17 +20,16 @@
         </a>
 
         <!-- Nav -->
-        <nav>
+        <nav id="nav">
             <ul>
                 <li><a href="index.html">Meet doToDo</a></li>
             </ul>
         </nav>
 
-
+        </div>
     </header>
 </div>
 
-<div id="page-wrapper">
     <div class="container">
 
         <div id="banner">
@@ -42,9 +44,9 @@
                 <p class="contact"><label for="email">Email:</label></p>
                 <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
                 <p class="contact"><label for="password">Create a password:</label></p>
-                <input type="password" id="password" name="password" required="" type="text" pattern=".{5,}" title="5 characters minimum">
+                <input type="password" id="password" name="password" required="" pattern=".{5,}" title="5 characters minimum">
                 <p class="contact"><label for="repassword">Confirm your password:</label></p>
-                <input type="password" id="repassword" name="password" required="" type="text" pattern=".{5,}" title="5 characters minimum" >
+                <input type="password" id="repassword" name="password" required=""  pattern=".{5,}" title="5 characters minimum" >
                 <br>
                 <input class="button" name="submit" id="submit"  value="Register" type="submit">
             </form>
