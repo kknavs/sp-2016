@@ -5,11 +5,13 @@ html, body {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 #header-wrapper {
     border-bottom: solid 1px #272d30;
     box-shadow: inset 0px -1px 0px 0px #51575a;
+    background-color: #8AC349;
 }
 
 /* Header */
@@ -17,6 +19,7 @@ html, body {
 #header {
     min-height: 155px;
     position: relative;
+
 }
 
 
@@ -28,12 +31,13 @@ html, body {
 }
 
 #header nav li{
+    float: left;
     list-style-type:none;
     margin-left: 60px;
 }
 
 #header nav a {
-    color: #c6c8c8;
+    color: #212121;
     text-decoration: none;
     font-size: 1.4em;
     outline: 0;
@@ -89,5 +93,69 @@ html, body {
     .container {
         width: 100% !important;
     }
+}
+
+.button.big, .button {
+    font-size: 1em;
+    height: 3.65em;
+    line-height: 3.65em;
+    cursor: pointer;
+    padding: 0 2.25em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 0.075em;
+    font-weight: 700;
+    display: inline-block;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    background-color: #689F38;
+    color: black;
+    border-radius: 0.375em;
+    border: 0;
+
+}
+
+.button{
+    height: 3em;
+    line-height: 3em;
+    padding: 0 1.25em;
+    margin: 0 0.5em;
+}
+
+.button.small{
+    height: 2em;
+    line-height: 2em;
+}
+
+.button:hover {
+    background-color: #8AC349;
+}
+
+.text.big{
+    font-size:1.3em;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    line-height: 1em;
+    display: block;
+    outline: 0;
+    padding: 0.75em;
+
+}
+
+select{
+
+    line-height: 1em;
+
+    padding: 0.75em;
+    display: block;
+}
+
+.tasksDay{
+    background-color: #DCEDC8;
+    padding: 1em;
+    margin-left: 1em;
 
 }
