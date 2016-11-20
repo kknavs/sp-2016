@@ -10,20 +10,20 @@ html, body {
 
 body{
     margin:0;
+    display: -webkit-flex;
     display: flex;
     flex-flow:column;
     min-height:100vh;
 
 }
 
-#main{
 
-}
 
 #page-wrapper{
     clear:both;
     flex-grow:1;
     flex-flow:column;
+    display: -webkit-flex;
     display: flex;
     justify-content: space-between;
    /* background: #f4ff77;*/
@@ -36,28 +36,57 @@ body{
     background-color: #8AC349;
 }
 
-
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    display: -webkit-flex;
+    display: flex;
+    flex-flow:column;
+    width: 90vw;
+    justify-content: center;
+}
 
 /* Header */
 
 #header {
-    min-height: 155px;
+    min-height: 80px;
     position: relative;
-
+    flex-flow:initial;
+    justify-content: space-between;
 }
 
 
+
+
 #header nav {
-    position: absolute;
-    right: 0;
     bottom: 20px;
     font-weight: 200;
 }
 
 #header nav li{
-    float: left;
+
     list-style-type:none;
     margin-left: 60px;
+}
+
+@media screen
+and (min-width: 414px) {
+    #header nav ul{
+        display: -webkit-flex;
+        display: flex;
+        flex-flow:column;
+        justify-content: space-between;
+    }
+}
+@media screen
+and (min-width: 1024px) {
+    #header nav ul{
+        margin-top:80px;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow:row;
+        justify-content: space-between;
+    }
 }
 
 #header nav a {
@@ -73,19 +102,38 @@ body{
 
 
 #header .logo img{
-    height: 120px;
+    height: 60px;
     position: absolute;
     left: 0;
-    bottom: 23px;
+    bottom: 10px;
+}
 
-
+@media screen
+and (min-width: 414px) {
+    #header {
+        min-height: 100px;
+    }
+    #header .logo img{
+        height: 80px;
+        bottom: 15px;
+    }
+}
+@media screen
+and (min-width: 1024px) {
+    #header {
+        min-height: 150px;
+    }
+    #header .logo img{
+        height: 120px;
+        bottom: 23px;
+    }
 }
 
 .row {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-
+    display: -webkit-flex;
 	display: flex;
 }
 
@@ -96,30 +144,9 @@ body{
     box-sizing: border-box;
 }
 
-.container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 10px;
-    width: 960px;
-}
 
-@media screen and (min-width: 737px) {
-    .container {
-        width: 1200px;
-    }
-}
 
-@media screen and (min-width: 737px) and (max-width: 1200px) {
-    .container {
-        width: 1000px;
-    }
-}
 
-@media screen and (max-width: 736px) {
-    .container {
-        width: 100% !important;
-    }
-}
 
 .button.big, .button {
     font-size: 1em;
@@ -213,3 +240,6 @@ footer .row > *{
 
     margin: 10px;
 }
+
+
+
