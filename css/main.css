@@ -8,11 +8,35 @@ html, body {
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
+body{
+    margin:0;
+    display: flex;
+    flex-flow:column;
+    min-height:100vh;
+
+}
+
+#main{
+
+}
+
+#page-wrapper{
+    clear:both;
+    flex-grow:1;
+    flex-flow:column;
+    display: flex;
+    justify-content: space-between;
+   /* background: #f4ff77;*/
+
+}
+
 #header-wrapper {
     border-bottom: solid 1px #272d30;
     box-shadow: inset 0px -1px 0px 0px #51575a;
     background-color: #8AC349;
 }
+
+
 
 /* Header */
 
@@ -61,11 +85,12 @@ html, body {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0px 0 -1px -20px;
+
+	display: flex;
 }
 
 .row > * {
-    float: left;
+    /*float: left;*/
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -74,6 +99,7 @@ html, body {
 .container {
     margin-left: auto;
     margin-right: auto;
+    padding-top: 10px;
     width: 960px;
 }
 
@@ -116,12 +142,16 @@ html, body {
     border: 0;
 
 }
+form {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
 
 .button{
     height: 3em;
     line-height: 3em;
     padding: 0 1.25em;
-    margin: 0 0.5em;
+
 }
 
 .button.small{
@@ -158,4 +188,28 @@ select{
     padding: 1em;
     margin-left: 1em;
 
+}
+
+
+
+
+/* header */
+footer{
+
+	background-color: #8AC349;
+	text-align:center;
+}
+
+.controls{
+    background-color: transparent;
+}
+
+footer .row{
+	justify-content: center;
+	align-items: center;
+}
+
+footer .row > *{
+
+    margin: 10px;
 }
