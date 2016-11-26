@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="TO-DO list, planner">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../css/main.css">
+    <title>doToDo Register</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#689f38">
+    <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<div id="page-wrapper">
+<div id="header-wrapper">
+    <header id="header" class="container">
+
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <span class="logo"><img src="../images/logo.svg" alt="" /></span>
+        </a>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html">Meet doToDo</a></li>
+            </ul>
+        </nav>
+
+
+    </header>
+</div>
+
+    <div class="container">
+
+        <div id="banner">
+            <h2>Want to plan with our free application?</h2>
+            <span>Register and check it out.</span>
+        </div>
+
+    </div>
+    <div id="main">
+        <div class="container">
+            <form method="post" action="home.html">
+                <p class="contact"><label for="email">Email:</label></p>
+                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+                <p class="contact"><label for="password">Create a password:</label></p>
+                <input type="password" id="password" name="password" required="" pattern=".{5,}" title="5 characters minimum">
+                <p class="contact"><label for="repassword">Confirm your password:</label></p>
+                <input type="password" id="repassword" name="password" required=""  pattern=".{5,}" title="5 characters minimum" >
+                <br>
+                <input class="button big" name="submit" id="submit"  value="Register" type="submit">
+            </form>
+
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <p>&copy; 2016 Spletno programiranje.</p>
+            <a href="http://www.fri.uni-lj.si/">FRI</a> |
+            <a href="mailto:kk7072@student.uni-lj.si">Contact author</a>
+        </div>
+    </footer>
+</div>
+
+
+</body>
+</html>

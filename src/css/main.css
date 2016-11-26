@@ -174,6 +174,12 @@ form {
     padding-top: 10px;
 }
 
+/*
+input:required {
+    background:hsl(180, 50%, 90%);
+    border:1px solid #999;
+}*/
+
 .button{
     height: 3em;
     line-height: 3em;
@@ -210,15 +216,6 @@ select{
     display: block;
 }
 
-.tasksDay{
-    background-color: #DCEDC8;
-    padding: 1em;
-    margin-left: 1em;
-
-}
-
-
-
 
 /* header */
 footer{
@@ -237,8 +234,102 @@ footer .row{
 }
 
 footer .row > *{
-
     margin: 10px;
+}
+
+.tasksDay{
+    background-color: #DCEDC8;
+    padding: 1em;
+    margin-left: 1em;
+    position: relative;
+    width: 500px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.tasksDay:before, .tasksDay:after
+{
+    position: absolute;
+    height: 10px;
+    content: ' ';
+    left: 12px;
+    bottom: 12px;
+    background: transparent;
+    -webkit-transform: skew(-5deg) rotate(-5deg);
+    -moz-transform: skew(-5deg) rotate(-5deg);
+    -ms-transform: skew(-5deg) rotate(-5deg);
+    -o-transform: skew(-5deg) rotate(-5deg);
+    transform: skew(-5deg) rotate(-5deg);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.tasksDay:after
+{
+    left: auto;
+    right: 12px;
+    -webkit-transform: skew(5deg) rotate(5deg);
+    -moz-transform: skew(5deg) rotate(5deg);
+    -ms-transform: skew(5deg) rotate(5deg);
+    -o-transform: skew(5deg) rotate(5deg);
+    transform: skew(5deg) rotate(5deg);
+}
+
+.tasksDay div {
+    border-bottom: 1px solid #DCEDC8;
+    height: 3em;
+    align-content: center;
+    display:-webkit-flex;
+    display:flex;
+    justify-content: space-between;
+    flex-flow: row;
+
+}
+
+
+
+label {
+    display: inline;
+    cursor: pointer;
+}
+
+.task-checkbox {
+    display: none;
+    width: 90%;
+    margin-left:auto;
+}
+
+.task-checkbox + label:after {
+/*'HEAVY BALLOT X' (U+2718) 'HEAVY MULTIPLICATION X' (U+2716)*/
+    content: '\2718';
+    position: relative;
+    font-weight: bold;
+    font-size: 2em;
+    top: 0.1em;
+    left: 3px;
+
+   /* color: transparent;*/
+}
+.task-checkbox:checked + label:after {
+    content: '\2714';
+    color: #689F38;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.tasksDay div a {
+    display: inline-block;
+    color: #212121;
+    text-decoration: none;
+    outline: 0;
+    font-size: 2em;
+    top: 0.2em;
+    color: #7d8771;
+    cursor: pointer;
 }
 
 
