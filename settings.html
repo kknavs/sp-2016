@@ -35,19 +35,19 @@
             </ul>
         </nav>
 
-
+        <script type="text/javascript" src="js/settings.js" defer></script>
     </header>
 </div>
 
 
     <div id="main">
         <div class="container">
-            <select>
+            <select id="settingsChange" onchange="settingsChange()">
                 <option value="Password">Change password</option>
                 <option value="Email">Change email</option>
                 <option value="Notifications">Task notification</option>
             </select>
-            <form>
+            <form id="formPassword">
                 <p class="contact"><label for="password">Enter new password:</label></p>
                 <input type="password" id="password" name="password" required=""  pattern=".{5,}" title="5 characters minimum">
                 <p class="contact"><label for="repassword">Confirm your new password:</label></p>
@@ -56,14 +56,14 @@
                 <input class="button" name="submitPassword" id="submitPassword"  value="Change password" type="submit">
             </form>
 
-            <form>
+            <form id="formEmail">
                 <p class="contact"><label for="email">Email:</label></p>
                 <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
                 <br>
                 <input class="button" name="submitEmail" id="submitEmail"  value="Change email" type="submit">
             </form>
 
-            <form>
+            <form id="formNotifications">
 
                 <p class="contact"><label for="notifications">Send email with tasks:</label></p>
                 <select name="notifications" id="notifications">

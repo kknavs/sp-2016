@@ -129,21 +129,40 @@ and (min-width: 1024px) {
     }
 }
 
-.row {
+.row, .column, .rowOrColumn {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    flex-flow:column;
     display: -webkit-flex;
 	display: flex;
+    overflow: auto;
+}
+.row {
+    flex-flow:row;
 }
 
-.row > * {
-    /*float: left;*/
+.column{
+    flex-flow: column;
+}
+@media screen
+and (min-width: 614px) { /*so at least two columns can be in row*/
+    .rowOrColumn{
+        flex-flow:row;
+    }
+}
+
+
+
+
+.row,.rowOrColumn > * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-
+.rowOrColumn > * {
+    max-width: 90%;
+}
 
 
 
@@ -250,14 +269,26 @@ a  {
 .tasksDay{
     background-color: #DCEDC8;
     padding: 1em;
-    margin-left: 10em;
+    margin: 1em;
     position: relative;
-    width: 500px;
+    min-width: 300px;
     background-color: #fff;
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 }
+
+.tasksDay div > label {
+    width: 70%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.tasksDay div:hover {
+    font-weight: bold;
+}
+
 
 .tasksDay:before, .tasksDay:after
 {
@@ -390,4 +421,29 @@ video{
 }
 
 
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #DCEDC8;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #DCEDC8;
+}
+canvas { border: 1px solid black;
+    width: 300px;
+    height: 300px;
+}
