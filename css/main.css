@@ -434,6 +434,7 @@ video{
 }
 
 /* Handle */
+/*
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -442,7 +443,7 @@ video{
 }
 ::-webkit-scrollbar-thumb:window-inactive {
     background: #DCEDC8;
-}
+}*/
 canvas { border: 1px solid black;
     width: 300px;
     height: 300px;
