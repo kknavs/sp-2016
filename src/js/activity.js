@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
 
-    //check daily status... emo3 bad, not so good, emo2 middle, emo1 happy  all done)
+    //check daily status... emo3 bad, not so good, emo2 middle, emo1 happy  (all done)
     var progress = 0.7;
     if(progress>0.5)
         document.getElementById("imgHappy").src="images/emo2.svg";
     else if(progress>0.99)
-        document.getElementById("imgHappy").src="images/emo2.svg";
+        document.getElementById("imgHappy").src="images/emo1.svg";
     var el = document.querySelector('#infoHappy');
     el.innerHTML = "Today you have done "+(0.7)*100+"% of tasks!";
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
     if (canvas.getContext){
-        var data = [0.7, 0.2, 0.4, 0.8, 1.0]
+        var data = [0.2, 0.4, 0.8, 1.0, 0.7]
         var ctx = canvas.getContext('2d');
 
         var width = canvas.width;
