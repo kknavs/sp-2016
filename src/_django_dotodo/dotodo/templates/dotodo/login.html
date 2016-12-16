@@ -1,0 +1,24 @@
+{% extends "dotodo/base.html" %}
+{% block head %}
+    <title>doToDo Login</title>
+{% endblock %}
+
+{% block nav_links %}
+    {% include 'dotodo/nav_links/meet.html' %}
+{% endblock %}
+
+{% block main %}
+    <section>
+            <form method="post" action="home.html">
+                <p class="contact"><label for="email">Email:</label></p>
+                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+                <p class="contact"><label for="password">Password:</label></p>
+                <input type="password" id="password" name="password" required=""  pattern=".{5,}" title="5 characters minimum" />
+                <br>
+                <input class="button big" name="submit" id="submit"  value="Login" type="submit" />
+                <br>
+                <br>
+            </form>
+            <a id="forgotPassword" href="{% url 'reset' %}">Forgot password?</a>
+    </section>
+{% endblock %}

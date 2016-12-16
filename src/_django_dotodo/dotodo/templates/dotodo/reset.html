@@ -1,0 +1,25 @@
+{% extends "dotodo/base.html" %}
+{% block head %}
+    <title>doToDo Reset password</title>
+{% endblock %}
+
+{% block nav_links %}
+    {% include 'dotodo/nav_links/meet.html' %}
+{% endblock %}
+
+{% block main %}
+<section>
+            <form method="post" >
+                <p class="contact"><label for="email">Email:</label></p>
+                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+                <br>
+                <input class="button big" name="reset" id="reset"  value="Reset" type="submit" />
+                <br>
+                <br>
+                <a id="resetNote" >Email sent!</a>
+                <noscript>
+                    Email will be sent shortly.
+                </noscript>
+            </form>
+</section>
+{% endblock %}

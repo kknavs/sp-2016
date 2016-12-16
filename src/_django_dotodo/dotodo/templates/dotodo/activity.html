@@ -1,0 +1,44 @@
+{% extends "dotodo/base.html" %}
+{% load static %}
+
+{% block head %}
+    <title>doToDo Activity</title>
+    <script type="text/javascript" src="{% static 'dotodo/js/activity.js' %}" defer></script>
+{% endblock %}
+{% block nav_links %}
+    {% include 'dotodo/nav_links/home.html' %}
+{% endblock %}
+
+{% block main %}
+            <section>
+
+                <p id="infoHappy">Today you have done: no js enabled? </p>
+                <img id="imgHappy" src="{% static 'dotodo/images/emo3.svg' %}"  width="200" height="200">
+                <p>Your activity so far (line to top means you have done all task for the day):</p>
+                <div class="column">
+                <canvas id="canvas" width="300" height="300">
+                    <img src="{% static 'dotodo/images/image_example.png' %}" alt="graph">
+                </canvas>
+
+                <table id="vertical-1">
+                    <tr>
+                        <th>Time period</th>
+                        <td>Friday, 25.11.</td><td>Saturday, 26.11.</td><td>Sunday, 27.11.</td><td>Yesterday</td><td>Today</td>
+                    </tr>
+                    <tr>
+                        <th>All tasks</th>
+                        <td>4</td><td>10</td><td>10</td><td>2</td><td>10</td>
+                    </tr>
+                    <tr>
+                        <th>Done tasks</th>
+                        <td>1</td><td>4</td><td>8</td><td>2</td><td>7</td>
+                    </tr>
+                    <tr>
+                        <th>Done tasks (percentage)</th>
+                        <td>25</td><td>40</td><td>80</td><td>100</td><td>70</td>
+                    </tr>
+                </table>
+                </div>
+            </section>
+
+{% endblock %}

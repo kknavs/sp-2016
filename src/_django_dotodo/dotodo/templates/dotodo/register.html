@@ -1,0 +1,31 @@
+{% extends "dotodo/base.html" %}
+{% block head %}
+    <title>doToDo Register</title>
+{% endblock %}
+
+{% block nav_links %}
+    {% include 'dotodo/nav_links/meet.html' %}
+{% endblock %}
+
+{% block main %}
+<section>
+
+        <h2>Want to plan with our free application?</h2>
+        <span>Register and check it out.</span>
+
+
+
+            <form method="post" action="home.html">
+                <p class="contact"><label for="email">Email:</label></p>
+                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
+                <p class="contact"><label for="password">Create a password:</label></p>
+                <input type="password" id="password" name="password" required="" pattern=".{5,}" title="5 characters minimum">
+                <p class="contact"><label for="repassword">Confirm your password:</label></p>
+                <input type="password" id="repassword" name="password" required=""  pattern=".{5,}" title="5 characters minimum" >
+                <input type="checkbox" id="terms" class="terms"  required="" /><label for="terms">I agree to the <a href="{% url 'policy' %}" target="_blank">terms and privacy</a>.</label>
+                <br>
+                <br>
+                <input class="button big" name="submit" id="submit"  value="Register" type="submit">
+            </form>
+</section>
+{% endblock %}

@@ -1,10 +1,67 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="description" content="TO-DO list, planner">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'dotodo/css/main.css' %}">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'dotodo/images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'dotodo/images/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static 'dotodo/images/favicon-16x16.png' %}" sizes="16x16">
+    <link rel="manifest" href="{% static 'dotodo/images/manifest.json' %}">
+    {% block head %}
+    {% endblock %}
+    <meta name="theme-color" content="#ffffff">
+
+    <script type="text/javascript" src="{% static 'dotodo/js/main.js' %}" defer></script>
+    <script type="text/javascript">
+        DJANGO_STATIC_URL_IMAGES = "{% static 'dotodo/images'%}";
+    </script>
 </head>
 <body>
+<div id="page-wrapper">
+    <div id="header-wrapper">
+        <header id="header" class="container">
 
+            <!-- Logo -->
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo"><img src="{% static 'dotodo/images/logo.svg' %}" alt="Logo"/></span>
+            </a>
+
+            <!-- Nav -->
+
+            <nav id="nav">
+                <ul>
+                    {% block nav_links %}
+                    {% endblock %}
+                </ul>
+            </nav>
+
+        </header>
+    </div>
+
+    {% block banner %}
+
+    {% endblock %}
+
+    <div id="main">
+        <div class="container">
+    {% block main %}
+
+    {% endblock %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="row">
+            <p>&copy; 2016 Spletno programiranje.</p>
+            <a href="http://www.fri.uni-lj.si/">FRI</a> |
+            <a href="mailto:kk7072@student.uni-lj.si">Contact author</a>
+        </div>
+    </footer>
+</div>
 </body>
 </html>
