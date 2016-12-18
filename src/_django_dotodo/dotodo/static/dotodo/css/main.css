@@ -193,6 +193,9 @@ form {
     padding-top: 10px;
 }
 
+.error input, .error select {
+    border: 2px red solid;
+}
 /*
 input:required {
     background:hsl(180, 50%, 90%);

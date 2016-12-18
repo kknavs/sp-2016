@@ -9,16 +9,13 @@
 
 {% block main %}
     <section>
-            <form method="post" action="home.html">
-                <p class="contact"><label for="email">Email:</label></p>
-                <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
-                <p class="contact"><label for="password">Password:</label></p>
-                <input type="password" id="password" name="password" required=""  pattern=".{5,}" title="5 characters minimum" />
-                <br>
-                <input class="button big" name="submit" id="submit"  value="Login" type="submit" />
-                <br>
-                <br>
-            </form>
+
+        <form method="POST"  action="">
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+            {% csrf_token %}
+            {{ loginForm.as_p }}
+            <input class="button big" name="submit" id="submit"  value="Login" type="submit" />
+        </form>
             <a id="forgotPassword" href="{% url 'reset' %}">Forgot password?</a>
     </section>
 {% endblock %}
