@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .forms import LoginForm
+from .forms import LoginForm, EditTaskForm, EditCategoryForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -30,9 +30,6 @@ def login_user(request):
         form = LoginForm()
     context['loginForm'] = form
     return render(request, 'dotodo/login.html', context)
-# Inside the settings.py file add:
-#LOGIN_REDIRECT_URL = 'home'
-#http://stackoverflow.com/questions/15084597/django-error-message-for-login-form
 
 
 def policy(request):
@@ -56,7 +53,21 @@ def activity(request):
 
 @login_required(login_url="login")
 def task(request):
-    return render(request, 'dotodo/task.html')
+    context = {}
+    if request.method == 'POST':
+        form = EditTaskForm(request.POST, request=request)
+        form_cat = EditCategoryForm(request.POST, request=request)
+        if form_cat.is_valid():
+            cat = form_cat.save()
+            if form.is_valid():
+                form.save(category=cat)
+                return index(request)
+    else:
+        form_cat = EditCategoryForm()
+        form = EditTaskForm()
+    context['edit_form'] = form
+    context['edit_form_cat'] = form_cat
+    return render(request, 'dotodo/task.html', context)
 
 
 @login_required(login_url="login")
@@ -68,4 +79,4 @@ def settings(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))  # reverse = maps name of the route (dotodo/)
-#http://stackoverflow.com/questions/21693342/django-after-login-required-redirect-to-next
+    # http://stackoverflow.com/questions/21693342/django-after-login-required-redirect-to-next

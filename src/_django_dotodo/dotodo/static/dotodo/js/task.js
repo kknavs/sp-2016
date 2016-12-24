@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
+    var node = document.createElement("video");
+    var child = document.getElementById('id_video');
+    child.parentNode.appendChild(node);
+    /*'<button id="addVideo" class="button small">Record video</button> ' +
+        '<video autoplay muted ></video> <button id="removeVideo" class="button small">Remove video</button> ' +
+        '<button id="stopVideo" class="button small">Stop recording</button> <div id="links"></div>');*/
 	document.getElementById("addVideo").addEventListener("click", recordSound);
 	document.getElementById("stopVideo").addEventListener("click", stopRecord);
     //document.getElementById("playVideo").addEventListener("click", playRecord);

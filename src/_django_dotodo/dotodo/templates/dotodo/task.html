@@ -12,37 +12,12 @@
 {% block main %}
 <section>
 
-            <form>
-                <p class="contact"><label for="title">Title:</label></p>
-                <input class="fullwidth" type="text" id="title" name="title" required=""  pattern=".{3,}" title="3 characters minimum">
-                <p class="contact"><label for="description">Description:</label></p>
-                <textarea class="fullwidth" id="description" name="description" required="" ></textarea>
-                <br>
-                <div><label for="date">Date: </label> <br><input id="date" required="" type="date" /></div>
-                <p class="contact"><label for="priority">Set priority for task:</label></p>
-                <select name="priority" id="priority">
-                    <option value="1">Do it now (urgent &amp; important)</option>
-                    <option value="2">Delegate (urgent, but not important)</option>
-                    <option value="3">Decide (important, but not urgent)</option>
-                    <option value="4">Do it later (not important, not urgent)</option>
-                </select>
-                <p class="contact"><label for="description">Add video (optional):</label> <button id="addVideo" class="button small">Record video</button> <!--<button id="playVideo" class="button small">Play video</button>--></p>
-                <video autoplay muted ></video>
-                <button id="removeVideo" class="button small">Remove video</button>
-                <button id="stopVideo" class="button small">Stop recording</button>
-                <div id="links"></div>
-                <p class="contact"><label for="category">Set category (optional):</label></p>
-                <select name="category" id="category">
-                    <option value="none">none</option>
-                    <option value="work">work</option>
-                    <option value="social">social</option>
-                </select>
-                <p class="contact"><label for="newCategory">Add task in new category (optional):</label></p>
-                <input type="text" id="newCategory" placeholder="Name of new category" name="newCategory" >
-                <br><br>
-                <input class="button" name="submitTask" id="submitTask"  value="Save task" type="submit">
-                <input class="button" name="submitTask" id="deleteTask"  value="Delete task" type="submit">
-                <input class="button" name="cancel" id="cancel"  value="Cancel" type="button">
-            </form>
+                <form method="POST"  action="">
+                    {% csrf_token %}
+                    {{ edit_form.as_p }}
+                    {{ edit_form_cat.as_p}}
+                    <input class="button" name="submitTask" id="submitTask"  value="Save task" type="submit" />
+                </form>
+
     </section>
 {% endblock %}
