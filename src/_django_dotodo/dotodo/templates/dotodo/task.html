@@ -15,9 +15,13 @@
                 <form method="POST"  action="">
                     {% csrf_token %}
                     {{ edit_form.as_p }}
-                    {{ edit_form_cat.as_p}}
+                    <a href="{% url 'category' %}" target="_blank">Edit categories &#x270F</a>
                     <input class="button" name="submitTask" id="submitTask"  value="Save task" type="submit" />
+                    {% if request.get_full_path != "/task/" %}
+                    <input class="button" name="deleteTask" id="deleteTask"  value="Delete task" type="submit" />
+                    {% endif %}
                 </form>
+
 
     </section>
 {% endblock %}

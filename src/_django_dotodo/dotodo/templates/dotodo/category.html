@@ -1,0 +1,24 @@
+{% extends "dotodo/base.html" %}
+{% load static %}
+
+{% block head %}
+    <title>doToDo Task</title>
+    <script type="text/javascript" src="{% static 'dotodo/js/task.js' %}" defer></script>
+{% endblock %}
+{% block nav_links %}
+    {% include 'dotodo/nav_links/home.html' %}
+{% endblock %}
+
+{% block main %}
+    <section>
+
+        <form method="POST"  action="">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <input class="button" name="submitCategory" id="submitTask"  value="Save category" type="submit" />
+            <input class="button" name="deleteCategory" id="deleteTask"  value="Delete category" type="submit" />
+        </form>
+
+
+    </section>
+{% endblock %}

@@ -12,10 +12,13 @@ def user_directory_path(instance, filename):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, default='')
+    cat_name = models.CharField(max_length=100, default='')
     created_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return u'{0}'.format(self.cat_name)
 
 
 class Task(models.Model):

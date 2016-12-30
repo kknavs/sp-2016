@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from .forms import LoginForm, EditTaskForm, EditCategoryForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import Task, Category
 # Create your views here.
 
 
@@ -52,22 +53,57 @@ def activity(request):
 
 
 @login_required(login_url="login")
-def task(request):
+def task(request, id=None):
+    if id:
+        task = get_object_or_404(Task, pk=id)
+        if task.user != request.user:
+            return HttpResponseForbidden()
+    else:
+        task = Task(user=request.user)
+
+    form = EditTaskForm(request.POST or None, instance=task, request=request)
     context = {}
     if request.method == 'POST':
-        form = EditTaskForm(request.POST, request=request)
-        form_cat = EditCategoryForm(request.POST, request=request)
-        if form_cat.is_valid():
-            cat = form_cat.save()
+        if 'deleteTask' in request.POST:
+            task.delete()
+            return HttpResponseRedirect(reverse('task'))
+        else:
             if form.is_valid():
-                form.save(category=cat)
-                return index(request)
-    else:
-        form_cat = EditCategoryForm()
-        form = EditTaskForm()
+                form.save()
+            return HttpResponseRedirect(reverse('task'))
     context['edit_form'] = form
-    context['edit_form_cat'] = form_cat
     return render(request, 'dotodo/task.html', context)
+
+
+@login_required(login_url="login")
+def category(request, id=None):
+    if id:
+        category = get_object_or_404(Category, user=request.user, pk=id)
+        if category.user != request.user:
+            return HttpResponseForbidden()
+    else:
+        category = Category(user=request.user)
+
+    form = EditCategoryForm(request.POST or None, instance=category, request=request)
+    context = {}
+    if request.method == 'POST':
+        if request.POST.get('category'):
+            category = get_object_or_404(Category, user=request.user, pk=request.POST.get('category'))
+            form = EditCategoryForm(request.POST or None, instance=category, request=request)
+            if category.user != request.user:
+                return HttpResponseForbidden()
+        else:
+            category = Category(user=request.user)
+        if 'deleteCategory' in request.POST:
+            category.delete()
+            return HttpResponseRedirect(reverse('category'))
+        else:
+            if form.is_valid():
+                test = form.save()
+                if test:
+                    return HttpResponseRedirect(reverse('category'))
+    context['edit_form'] = form
+    return render(request, 'dotodo/category.html', context)
 
 
 @login_required(login_url="login")
@@ -79,4 +115,4 @@ def settings(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))  # reverse = maps name of the route (dotodo/)
-    # http://stackoverflow.com/questions/21693342/django-after-login-required-redirect-to-next
+

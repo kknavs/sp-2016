@@ -31,7 +31,7 @@ class DateTypeInput(forms.DateInput):
 
 class EditTaskForm(forms.ModelForm):
     date = forms.fields.DateField(localize=True, widget=DateTypeInput)
-    # newCategory = forms.fields.CharField(label='Name of new category (optional):', required=False) - separate form
+    # newCategory = forms.fields.CharField(label='Name of new category (optional):', required=False) #- separated
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -55,18 +55,24 @@ class EditTaskForm(forms.ModelForm):
 
 
 class EditCategoryForm(forms.ModelForm):
+    category = forms.ModelChoiceField(label='Category', queryset=Category.objects.all(), empty_label='*Add new category*', required=False)
+    cat_name = forms.fields.CharField(label='Name of category:', required=False)
+    # http://stackoverflow.com/questions/4880842/how-to-dynamically-set-the-queryset-of-a-models-modelchoicefield-on-a-forms-form
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(EditCategoryForm, self).__init__(*args, **kwargs)
-        self.fields['name'].label = 'Name of new category (optional):'
 
     def save(self, *args, **kwargs):
-        kwargs['commit'] = False
-        obj = super(EditCategoryForm, self).save(*args, **kwargs)
-        if self.request:
-            obj.user = self.request.user
-        obj.save()
-        return obj
+        if self.request.POST.get('cat_name'):
+            kwargs['commit'] = False
+            obj = super(EditCategoryForm, self).save(*args, **kwargs)
+            if self.request:
+                obj.user = self.request.user
+            obj.save()
+            return obj
+        self.add_error('cat_name', 'Name is required field for new category and update.')
+        return None
 
     class Meta:
         model = Category
