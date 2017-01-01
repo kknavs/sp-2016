@@ -1,0 +1,13 @@
+{% extends "dotodo/base.html" %}
+{% load i18n %}
+{% block head %}
+    <title>doToDo Register</title>
+{% endblock %}
+
+{% block nav_links %}
+    {% include 'dotodo/nav_links/meet.html' %}
+{% endblock %}
+
+{% block main %}
+<p>{% trans "You are now registered. Activation email sent." %}</p>
+{% endblock %}

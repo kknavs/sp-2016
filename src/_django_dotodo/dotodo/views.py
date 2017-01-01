@@ -13,10 +13,6 @@ def index(request):
     return render(request, 'dotodo/index.html')
 
 
-def register(request):
-    return render(request, 'dotodo/register.html')
-
-
 def login_user(request):
     context = {}
     if request.method == 'POST':

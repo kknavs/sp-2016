@@ -1,0 +1,21 @@
+{% extends "dotodo/base.html" %}
+{% load i18n %}
+{% block head %}
+    <title>doToDo Register</title>
+{% endblock %}
+
+{% block nav_links %}
+    {% include 'dotodo/nav_links/meet.html' %}
+{% endblock %}
+
+{% block main %}
+<form method="post" action="">
+  {% csrf_token %}
+  {{ form.as_p }}
+    <br/>
+    <input class="button big" type="submit" value="{% trans 'Submit' %}" />
+    <p>By clicking submit you agree to the <a href="{% url 'policy' %}" target="_blank">Terms and Privacy Policy</a>.</p>
+    <br/>
+
+</form>
+{% endblock %}
