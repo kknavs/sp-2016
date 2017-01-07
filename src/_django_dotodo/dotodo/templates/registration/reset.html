@@ -1,4 +1,6 @@
 {% extends "dotodo/base.html" %}
+{% load i18n %}
+
 {% block head %}
     <title>doToDo Reset password</title>
 {% endblock %}
@@ -9,7 +11,16 @@
 
 {% block main %}
 <section>
-            <form method="post" >
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input class="button big" type="submit" value="{% trans 'Reset' %}" />
+        <noscript>
+            Email will be sent shortly.
+        </noscript>
+    </form>
+{% comment %}            <form method="post" >
                 <p class="contact"><label for="email">Email:</label></p>
                 <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
                 <br>
@@ -20,6 +31,6 @@
                 <noscript>
                     Email will be sent shortly.
                 </noscript>
-            </form>
+            </form>{% endcomment %}
 </section>
 {% endblock %}

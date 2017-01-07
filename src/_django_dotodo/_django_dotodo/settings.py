@@ -123,8 +123,17 @@ STATIC_URL = '/static/'
 
 # settings for: https://github.com/ubernostrum/django-registration
 ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 25
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 LOGIN_REDIRECT_URL = '/home/'
+# for debugging
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 25
+# DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# python -m smtpd -n -c DebuggingServer localhost:25
+
+# Gmail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'xxx'
+EMAIL_HOST_PASSWORD = 'xxx'

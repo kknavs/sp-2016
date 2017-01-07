@@ -34,7 +34,7 @@ def policy(request):
 
 
 def reset(request):
-    return render(request, 'dotodo/reset.html')
+    return render(request, 'registration/reset.html')
 
 
 # user logged in

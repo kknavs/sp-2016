@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 
 from . import views
 
@@ -7,8 +8,16 @@ urlpatterns = [
     url(r'^login/', views.login_user, name='login'),
     # url(r'^register/', views.register, name='register'),
     url(r'^privacy_policy/', views.policy, name='policy'),
-    url(r'^reset/', views.reset, name='reset'),
+    url(r'^password/reset/$', password_reset, {'template_name': 'registration/reset.html'}, name='password_reset'),
+    url(r'^password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+         password_reset_confirm, {'template_name': 'registration/auth_password_reset_confirm.html'}, name='password_reset_confirm'),
+    url(r'^password/reset/complete/$',
+        password_reset_complete,{'template_name': 'registration/auth_password_reset_complete.html'},
+        name='password_reset_complete'),
+    url(r'^password/reset/done/$', password_reset_done, {'template_name': 'registration/auth_password_reset_done.html'},
+        name='password_reset_done'),
 
+    # user must be logged in
     url(r'^home/', views.home, name='home'),
     url(r'^task/$', views.task, name='task'),
     url(r'^task/edit/(?P<id>\d+)/$', views.task, name='task'),

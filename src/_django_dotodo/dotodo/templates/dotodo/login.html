@@ -1,4 +1,6 @@
 {% extends "dotodo/base.html" %}
+{% load i18n %}
+
 {% block head %}
     <title>doToDo Login</title>
 {% endblock %}
@@ -16,6 +18,8 @@
             {{ loginForm.as_p }}
             <input class="button big" name="submit" id="submit"  value="Login" type="submit" />
         </form>
-            <a id="forgotPassword" href="{% url 'reset' %}">Forgot password?</a>
+        <p> <a id="forgotPassword" href="{% url 'auth_password_reset' %}">{% trans "Forgot password" %}?</a></p>
+        <p> <a href="{% url 'registration_register' %}">{% trans "Not member" %}?</a></p>
+
     </section>
 {% endblock %}
