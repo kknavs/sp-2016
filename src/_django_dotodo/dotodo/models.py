@@ -17,6 +17,9 @@ class Category(models.Model):
     updated_date = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = ('cat_name', 'user',)
+
     def __str__(self):
         return u'{0}'.format(self.cat_name)
 
