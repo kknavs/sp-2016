@@ -3,7 +3,6 @@
 
 {% block head %}
     <title>doToDo Settings</title>
-    <script type="text/javascript" src="{% static 'dotodo/js/settings.js' %}" defer></script>
 {% endblock %}
 {% block nav_links %}
     {% include 'dotodo/nav_links/home.html' %}
@@ -11,38 +10,28 @@
 
 {% block main %}
     <section>
-            <select id="settingsChange" onchange="settingsChange()">
-                <option value="Password">Change password</option>
-                <option value="Email">Change email</option>
-                <option value="Notifications">Task notification</option>
-            </select>
-            <form id="formPassword">
-                <p class="contact"><label for="password">Enter new password:</label></p>
-                <input type="password" id="password" name="password" required=""  pattern=".{5,}" title="5 characters minimum">
-                <p class="contact"><label for="repassword">Confirm your new password:</label></p>
-                <input type="password" id="repassword" name="password" required=""  pattern=".{5,}" title="5 characters minimum">
-                <br>
-                <input class="button" name="submitPassword" id="submitPassword"  value="Change password" type="submit">
-            </form>
 
-            <form id="formEmail">
+           {% comment %} <form id="formEmail">
                 <p class="contact"><label for="email">Email:</label></p>
                 <input id="email" name="email" placeholder="example@domain.com" required="" type="email">
                 <br>
                 <input class="button" name="submitEmail" id="submitEmail"  value="Change email" type="submit">
-            </form>
+            </form>{% endcomment %}
 
-            <form id="formNotifications">
+        <form id="formNotifications" method="POST"  action="">
+            {% csrf_token %}
+            {{ edit_form.as_p }}
+            <input class="button" name="submitNotifications" id="submitNotifications"  value="Change notifications" type="submit">
+        </form>
 
-                <p class="contact"><label for="notifications">Send email with tasks:</label></p>
-                <select name="notifications" id="notifications">
-                    <option value="Day">Every day</option>
-                    <option value="Important">For important task</option>
-                    <option value="Notifications">No notifications</option>
-                </select>
+        <form id="formUsername" method="POST"  action="">
+            {% csrf_token %}
+            {{ edit_u.as_p }}
+            <input class="button" name="submitUsername" id="submitUsername"  value="Change username" type="submit">
+        </form>
 
-                <br>
-                <input class="button" name="submitNotifications" id="submitNotifications"  value="Change notifications" type="submit">
-            </form>
+        <a href="{% url 'password_change' %}" target="_blank">Change password</a>
+
+
     </section>
 {% endblock %}

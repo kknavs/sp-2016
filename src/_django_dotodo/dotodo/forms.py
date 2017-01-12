@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate, login, logout
-from .models import Task, Category
+from .models import *
 
 
 class LoginForm(forms.Form):
@@ -77,3 +77,30 @@ class EditCategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         exclude = ['created_date', 'updated_date', 'user']
+
+
+class EditNotificationsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(EditNotificationsForm, self).__init__(*args, **kwargs)
+        self.fields['priority'].label = 'Set notifications sending through email:'
+
+    def save(self, *args, **kwargs):
+        kwargs['commit'] = False
+        obj = super(EditNotificationsForm, self).save(*args, **kwargs)
+        if self.request:
+            obj.user = self.request.user
+        obj.save()
+        return obj
+
+    class Meta:
+        model = Notifications
+        exclude = ['user']
+
+
+class EditUsernameForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ['username']

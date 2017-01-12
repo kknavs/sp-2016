@@ -3,6 +3,7 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.db.models.signals import post_save
 
 
 # https://docs.djangoproject.com/en/1.10/ref/models/fields/#filefield
@@ -40,8 +41,24 @@ class Task(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.OneToOneField(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
 
+
+class Notifications(models.Model):
+    PRIORITY_CHOICES = (
+        ('1', 'Every day'),
+        ('2', 'For important task'),
+        ('3', 'No notifications'),
+    )
+    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default=1)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='notifications')
+
+
+def create_user_notifications(sender, instance, created, **kwargs):
+    if created:
+        Notifications.objects.create(user=instance)
+
+post_save.connect(create_user_notifications, sender=User)
 
 
 

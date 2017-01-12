@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
-from .forms import LoginForm, EditTaskForm, EditCategoryForm
+from .forms import *
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Task, Category
+from .models import Task, Category, Notifications
 # Create your views here.
 
 
@@ -104,7 +104,25 @@ def category(request, id=None):
 
 @login_required(login_url="login")
 def settings(request):
-    return render(request, 'dotodo/settings.html')
+    notifications = get_object_or_404(Notifications, user=request.user)
+    if notifications.user != request.user:
+            return HttpResponseForbidden()
+    #else:
+    # task = Task(user=request.user)
+    formU = EditUsernameForm(request.POST or None, instance=request.user)
+    form = EditNotificationsForm(request.POST or None, instance=notifications, request=request)
+    context = {}
+    if request.method == 'POST':
+        if 'submitUsername' in request.POST:
+            formU.save()
+            return HttpResponseRedirect(reverse('settings'))
+        else:
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse('settings'))
+    context['edit_form'] = form
+    context['edit_u'] = formU
+    return render(request, 'dotodo/settings.html', context)
 
 
 @login_required(login_url="login")

@@ -12,8 +12,7 @@
     <link rel="icon" type="image/png" href="{% static 'dotodo/images/favicon-32x32.png' %}" sizes="32x32">
     <link rel="icon" type="image/png" href="{% static 'dotodo/images/favicon-16x16.png' %}" sizes="16x16">
     <link rel="manifest" href="{% static 'dotodo/images/manifest.json' %}">
-    {% block head %}
-    {% endblock %}
+
     <meta name="theme-color" content="#ffffff">
 
     <script type="text/javascript" src="{% static 'dotodo/js/main.js' %}" defer></script>
@@ -21,6 +20,10 @@
         DJANGO_STATIC_URL_IMAGES = "{% static 'dotodo/images'%}";
     </script>
     <script src="{% static 'dotodo/js/jquery-3.1.1.min.js' %}"></script>
+
+    {% block head %}
+    {% endblock %}
+
 </head>
 <body>
 <div id="page-wrapper">
@@ -28,7 +31,11 @@
         <header id="header" class="container">
 
             <!-- Logo -->
-            <a href="{% url 'index' %}" class="logo">
+            {% if user.is_authenticated %}
+            <a href="{% url 'home' %}" class="logo">
+                {% else %}
+                <a href="{% url 'index' %}" class="logo">
+            {% endif %}
                 <span class="logo"><img src="{% static 'dotodo/images/logo.svg' %}" alt="Logo"/></span>
             </a>
 

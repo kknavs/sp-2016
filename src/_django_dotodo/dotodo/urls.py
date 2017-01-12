@@ -1,5 +1,6 @@
 from django.conf.urls import url
-from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm,\
+    password_reset_complete, password_change_done, password_change
 
 from . import views
 
@@ -16,6 +17,10 @@ urlpatterns = [
         name='password_reset_complete'),
     url(r'^password/reset/done/$', password_reset_done, {'template_name': 'registration/auth_password_reset_done.html'},
         name='password_reset_done'),
+    url(r'^password/change/$', password_change, {'template_name': 'registration/auth_password_change_form.html'},
+        name='password_change'),
+    url(r'^password/change/done$', password_change_done, {'template_name': 'registration/auth_password_change_done.html'},
+        name='password_change_done'),
 
     # user must be logged in
     url(r'^home/', views.home, name='home'),

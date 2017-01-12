@@ -1,11 +1,13 @@
 from django.utils import timezone
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.db.utils import IntegrityError
+from django.db import transaction
 
 from .models import Task, Category
 
 
-class TaskTests(TestCase):
+class TaskCategoriesTests(TestCase):
     def setUp(self):
         self.u1 = User.objects.create(username='user1')
 
@@ -30,6 +32,18 @@ class TaskTests(TestCase):
         self.assertIs(Task.objects.filter(title=t.title).exists(), False)
         self.assertIs(Category.objects.filter(user=u.pk).exists(), False)
         self.assertIs(Category.objects.filter(user=self.u1.pk).exists(), True)
+
+    def test_categories_uniqueness(self):
+        """
+        one user must have unique names for all categories
+        """
+        try:
+            with transaction.atomic():
+                Category.objects.create(cat_name="cat", user=self.u1)
+                Category.objects.create(cat_name="cat", user=self.u1)
+        except Exception as e:
+            self.assertIs(IntegrityError, e.__class__)
+        # possible also: self.assertRaises(IntegrityError, name_of_function)
 
     def tearDown(self):
         self.u1.delete()
