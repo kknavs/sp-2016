@@ -25,7 +25,7 @@ urlpatterns = [
     # user must be logged in
     url(r'^home/', views.home, name='home'),
     url(r'^task/$', views.task, name='task'),
-    url(r'^task/edit/(?P<id>\d+)/$', views.task, name='task'),
+    url(r'^task/edit/(?P<id>\d+)/$', views.task, name='task_edit'),
     url(r'^category/$', views.category, name='category'),
     # url(r'^category/edit/(?P<id>\d+)/$', views.category, name='category'),
     url(r'^activity/', views.activity, name='activity'),

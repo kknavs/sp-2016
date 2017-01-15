@@ -11,7 +11,7 @@
 {% block main %}
             <section>
                 <p class="text big">Make the time.</p>
-                <p>Hello, User!</p>
+                <p>Hello, {{request.user.username}}!</p>
             </section>
             <section>
                 <div class="rowOrColumn">
@@ -23,22 +23,39 @@
                 <div > <input id="checkbox-1-5" class="task-checkbox" type="checkbox"   /><label for="checkbox-1-5">Return keys </label><a href="task.html" target="_blank">&#x270F</a></div>
                     <div class="controls footer">  <a href="task.html" class="button big">Save</a></div>
                 </div>
-                <div class="tasksDay"><p class="text big">Tuesday</p>
-                    <div> <input type="checkbox" id="checkbox-2-1" class="task-checkbox"  checked="checked" /><label for="checkbox-2-1">Do homework</label><a href="task.html" target="_blank">&#x270F</a></div>
-                    <div > <input type="checkbox" id="checkbox-2-2" class="task-checkbox"  ><label for="checkbox-2-2">Meet Anne</label><a href="task.html" target="_blank">&#x270F</a></div>
-                    <div class="controls footer">  <a href="task.html" class="button big">Save</a></div>
-                </div>
-              <!--      <div class="taskDay"><p class="text big">Tuesday</p>
-                        <div> <input type="checkbox" id="checkbox-1-22"  class="task-checkbox"  checked="checked" /><label for="checkbox-1-22">Do homework</label><a href="task.html" target="_blank">&#x270F</a></div>
-                        <div >Description... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse posuere odio et ante congue sagittis. Pellentesque sed purus ultricies, sollicitudin quam ac, pulvinar elit. Morbi sit amet condimentum magna, in vestibulum felis.
-                            <br/><br/>Priority: Delegate
-                            <br/>Category: Work
-                            <br/>
-                            <div/>
-                        <div class="controls footer">  <a href="register.html" class="button big">Save</a></div>
-                    </div>-->
+                    <div class="tasksDay"><p class="text big">Testtt</p>
+{#                        <div> <input type="checkbox" id="checkbox-2-1" class="task-checkbox"  checked="checked" /><label for="checkbox-2-1">Do homework</label><a href="task.html" target="_blank">&#x270F</a></div>#}
+                        {% for task in tasks %}
+                            <div> <input type="checkbox" id="checkbox-2-1" class="task-checkbox"  checked="checked" />
+                                <label for="checkbox-2-1">{{ task.title}}</label><a href="{% url 'task_edit' task.id %}" target="_blank">&#x270F</a></div>
+                        {% endfor %}
+
+                        <div class="controls footer">  <a href="{% url 'home'  %}" class="button big">Save</a></div>
+                    </div>
 
                 </div>
+
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                            {% else %}
+                                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
 
                 <div class="column">
                     <div>

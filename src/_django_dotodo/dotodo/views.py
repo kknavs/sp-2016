@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from .forms import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Task, Category, Notifications
+import logging
 # Create your views here.
 
 
@@ -40,11 +42,24 @@ def reset(request):
 # user logged in
 @login_required(login_url="login")
 def home(request):
-    return render(request, 'dotodo/home.html')
+    task_list = Task.objects.filter(user=request.user)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(task_list, 10)
+    try:
+        tasks = paginator.page(page)
+    except PageNotAnInteger:
+        tasks = paginator.page(1)
+    except EmptyPage:
+        tasks = paginator.page(paginator.num_pages)
+
+    return render(request, 'dotodo/home.html', {'tasks': tasks})
+    #return render(request, 'dotodo/home.html')
 
 
 @login_required(login_url="login")
 def activity(request):
+    # logger = logging.getLogger('DOTODO_log')
+    # logger.error("Visited activity - "+request.user.username)
     return render(request, 'dotodo/activity.html')
 
 

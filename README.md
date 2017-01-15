@@ -18,3 +18,12 @@ Microsoft Edge 38.
 Video recorder dela popolno samo na firefoxu (predvajanje po snemanju).
 
 Zaradi validacije je bilo potrebno izbrisati 'safari-pinned-tab.svg' (generirano z http://realfavicongenerator.net/) in CSS za webkit handle (je spodaj zakomentirano). 
+
+
+# Django
+
+V src/_django_dotodo/ je aplikacija z Django backendom.
+
+Registracija uporabnika je osnovana s pomočjo:
+https://github.com/ubernostrum/django-registration
+https://github.com/macdhuibh/django-registration-templates
