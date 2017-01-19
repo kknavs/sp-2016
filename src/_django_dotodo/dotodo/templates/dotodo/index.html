@@ -1,6 +1,7 @@
 {% extends "dotodo/base.html" %}
+{% load i18n %}
 {% block head %}
-    <title>doToDo Welcome</title>
+    <title>{% blocktrans %}doToDo Welcome{% endblocktrans %}</title>
 {% endblock %}
 
 {% block nav_links %}
@@ -10,25 +11,25 @@
 {% block banner %}
 <div class="container">
     <br/>
-    <h2>Make your list. Check it twice.</h2>
+    <h2>{% blocktrans %}Make your list. Check it twice.{% endblocktrans %}</h2>
     <br/>
 </div>
 <div id="banner">
 
-    <h1>Do it!</h1>
+    <h1>{% blocktrans %}Do it!{% endblocktrans %}</h1>
 </div>
 {% endblock %}
 
 {% block main %}
     <section>
-        <h2>Welcome to <span>doToDo</span>!</h2>
-        <p>This is <strong>doToDo</strong>, a free web application which helps you do your To-Do's. :)
+        <h2>{% blocktrans %}Welcome to <span>doToDo</span>!{% endblocktrans %}</h2>
+        <p>{% blocktrans %}This is <strong>doToDo</strong>, a free web application which helps you do your To-Do's. :)
             Manage tasks anywhere you want to, on mobile device or computer.
             Tackle your tasks by priority and get notified about them them via email.
-            Be more organized and motivated!
+            Be more organized and motivated!{% endblocktrans %}
         </p>
         <footer class="controls">
-            <a href="{% url 'registration_register' %}" class="button big">Register</a>
+            <a href="{% url 'registration_register' %}" class="button big">{% trans "Register" %}</a>
         </footer>
     </section>
 {% endblock %}

@@ -7,6 +7,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Task, Category, Notifications
+from chartit import DataPool, Chart
+from django.db.models import Count, Case, When, Sum
+from django.utils.translation import ugettext as _
 import logging
 # Create your views here.
 
@@ -42,9 +45,11 @@ def reset(request):
 # user logged in
 @login_required(login_url="login")
 def home(request):
-    task_list = Task.objects.filter(user=request.user)
+    task_list = Task.objects.filter(user=request.user).order_by('date','priority') # aggregate .values('date')
+    dates = Task.objects.values('date').distinct().order_by()
+    #Customer.objects.order_by('state', 'city_name', 'customer_name')
     page = request.GET.get('page', 1)
-    paginator = Paginator(task_list, 10)
+    paginator = Paginator(task_list, 20)
     try:
         tasks = paginator.page(page)
     except PageNotAnInteger:
@@ -52,7 +57,7 @@ def home(request):
     except EmptyPage:
         tasks = paginator.page(paginator.num_pages)
 
-    return render(request, 'dotodo/home.html', {'tasks': tasks})
+    return render(request, 'dotodo/home.html', {'tasks': tasks, 'dates': dates})
     #return render(request, 'dotodo/home.html')
 
 
@@ -60,7 +65,34 @@ def home(request):
 def activity(request):
     # logger = logging.getLogger('DOTODO_log')
     # logger.error("Visited activity - "+request.user.username)
-    return render(request, 'dotodo/activity.html')
+    data = DataPool(
+        series=
+        [{'options': {
+            'source':  Task.objects.filter(user=request.user).values('date').annotate(
+                data_sum=Count(Case(When(finished=True, then=1))))},
+            'terms': [
+                'date',
+                'data_sum',]}
+        ])
+
+    # Step 2: Create the Chart object
+    cht = Chart(
+        datasource=data,
+        series_options=
+        [{'options':{
+            'type': 'line',
+            'stacking': False},
+            'terms':{
+                'date': [
+                    'data_sum']
+            }}],
+        chart_options =
+        {'title': {
+            'text': _("Opravljene naloge")},
+            'xAxis': {
+                'title': {
+                    'text': ''}}})
+    return render(request, 'dotodo/activity.html', {'chart': cht})
 
 
 @login_required(login_url="login")

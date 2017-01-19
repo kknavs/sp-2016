@@ -16,7 +16,7 @@
             <input type="hidden" name="next" value="{{ request.GET.next }}" />
             {% csrf_token %}
             {{ loginForm.as_p }}
-            <input class="button big" name="submit" id="submit"  value="Login" type="submit" />
+            <input class="button big" name="submit" id="submit"  value={% trans "Login" %} type="submit" />
         </form>
         <p> <a id="forgotPassword" href="{% url 'auth_password_reset' %}">{% trans "Forgot password" %}?</a></p>
         <p> <a href="{% url 'registration_register' %}">{% trans "Not member" %}?</a></p>

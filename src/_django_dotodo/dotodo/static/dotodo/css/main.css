@@ -323,7 +323,7 @@ a  {
     transform: skew(5deg) rotate(5deg);
 }
 
-.tasksDay div:not(:last-child){  /* not applying for button*/
+.tasksDay div{ /*:not(:last-child){   not applying for button*/
     border-bottom: 1px solid #DCEDC8;
     height: 3em;
     align-content: center;
@@ -357,6 +357,7 @@ label {
     top: 0.1em;
     left: 3px;
 
+
    /* color: transparent;*/
 }
 
@@ -366,12 +367,14 @@ label {
     font-weight: bold;
     font-size: 2em;
 }
+
 .tasksDay div:last-child a {
     margin-top: 10px;
     cursor: pointer;
 }
 
-.tasksDay div:not(:last-child) a  {
+/* //:not(:last-child)*/
+.tasksDay div a  {
     display: inline-block;
     text-decoration: none;
     outline: 0;

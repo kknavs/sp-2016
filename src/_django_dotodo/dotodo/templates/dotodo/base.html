@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,6 +52,13 @@
 
         </header>
     </div>
+    {% get_available_languages as languages %}
+
+    {% for lang_code, lang_name in languages %}
+        {% language lang_code %}
+            <a href="{% url 'index' %}">{{ lang_name }}</a>
+        {% endlanguage %}
+    {% endfor %}
 
     {% block banner %}
 
@@ -67,7 +76,7 @@
         <div class="row">
             <p>&copy; 2017 Spletno programiranje.</p>
             <a href="http://www.fri.uni-lj.si/">FRI</a> |
-            <a href="mailto:kk7072@student.uni-lj.si">Contact author</a>
+            <a href="mailto:kk7072@student.uni-lj.si">{% trans "Contact author" %}</a>
         </div>
     </footer>
 </div>

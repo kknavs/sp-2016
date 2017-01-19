@@ -1,8 +1,9 @@
 {% extends "dotodo/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
-    <title>doToDo Settings</title>
+    <title>{% blocktrans %}doToDo Settings{% endblocktrans %}</title>
 {% endblock %}
 {% block nav_links %}
     {% include 'dotodo/nav_links/home.html' %}
@@ -21,16 +22,16 @@
         <form id="formNotifications" method="POST"  action="">
             {% csrf_token %}
             {{ edit_form.as_p }}
-            <input class="button" name="submitNotifications" id="submitNotifications"  value="Change notifications" type="submit">
+            <input class="button" name="submitNotifications" id="submitNotifications"  value={% trans  "Change" %} type="submit">
         </form>
 
         <form id="formUsername" method="POST"  action="">
             {% csrf_token %}
             {{ edit_u.as_p }}
-            <input class="button" name="submitUsername" id="submitUsername"  value="Change username" type="submit">
+            <input class="button" name="submitUsername" id="submitUsername"  value={% trans "Change username" %} type="submit">
         </form>
 
-        <a href="{% url 'password_change' %}" target="_blank">Change password</a>
+        <a href="{% url 'password_change' %}" target="_blank">{% blocktrans %}Change password{% endblocktrans %}</a>
 
 
     </section>

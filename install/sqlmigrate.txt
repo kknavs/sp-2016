@@ -1,0 +1,25 @@
+BEGIN;
+--
+-- Create model Category
+--
+CREATE TABLE "dotodo_category" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cat_name" varchar(100) NOT NULL, "created_date" datetime NOT NULL, "updated_date" datetime NOT NULL, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+--
+-- Create model Notifications
+--
+CREATE TABLE "dotodo_notifications" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "priority" varchar(1) NOT NULL, "user_id" integer NOT NULL UNIQUE REFERENCES "auth_user" ("id"));
+--
+-- Create model Task
+--
+CREATE TABLE "dotodo_task" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "description" text NOT NULL, "date" date NOT NULL, "priority" varchar(1) NOT NULL, "finished" bool NOT NULL, "video" varchar(100) NULL, "created_date" datetime NOT NULL, "updated_date" datetime NOT NULL, "category_id" integer NULL REFERENCES "dotodo_category" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+--
+-- Alter unique_together for category (1 constraint(s))
+--
+ALTER TABLE "dotodo_category" RENAME TO "dotodo_category__old";
+CREATE TABLE "dotodo_category" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cat_name" varchar(100) NOT NULL, "created_date" datetime NOT NULL, "updated_date" datetime NOT NULL, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+INSERT INTO "dotodo_category" ("id", "cat_name", "user_id", "updated_date", "created_date") SELECT "id", "cat_name", "user_id", "updated_date", "created_date" FROM "dotodo_category__old";
+DROP TABLE "dotodo_category__old";
+CREATE INDEX "dotodo_task_b583a629" ON "dotodo_task" ("category_id");
+CREATE INDEX "dotodo_task_e8701ad4" ON "dotodo_task" ("user_id");
+CREATE UNIQUE INDEX "dotodo_category_cat_name_f3fcc26c_uniq" ON "dotodo_category" ("cat_name", "user_id");
+CREATE INDEX "dotodo_category_e8701ad4" ON "dotodo_category" ("user_id");
+COMMIT;

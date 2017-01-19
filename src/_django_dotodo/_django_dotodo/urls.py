@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.i18n import i18n_patterns
+
+#urlpatterns = patterns('',(r'^i18n/', include('django.conf.urls.i18n')), )
+
+urlpatterns = i18n_patterns(
+                            url(r'^admin/', admin.site.urls),
+                            url(r'^', include('dotodo.urls')),
+                            url(r'^', include('registration.backends.hmac.urls')),
+                            )
 
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^', include('dotodo.urls')),
-    url(r'^', include('registration.backends.hmac.urls')),
-   # url(r'^dotodo/', include('dotodo.urls')),
-]

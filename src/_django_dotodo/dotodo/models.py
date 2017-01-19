@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models.signals import post_save
+from django.utils.translation import ugettext as _
 
 
 # https://docs.djangoproject.com/en/1.10/ref/models/fields/#filefield
@@ -30,10 +31,10 @@ class Task(models.Model):
     description = models.TextField()
     date = models.DateField(default=timezone.datetime.today)
     PRIORITY_CHOICES = (
-        ('1', 'Do it now (urgent & important)'),
-        ('2', 'Delegate (urgent, but not important)'),
-        ('3', 'Decide (important, but not urgent)'),
-        ('4', 'Do it later (not important, not urgent)')
+        ('1', _('Do it now (urgent & important)')),
+        ('2', _('Delegate (urgent, but not important)')),
+        ('3', _('Decide (important, but not urgent)')),
+        ('4', _('Do it later (not important, not urgent)'))
     )
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default=1)
     finished = models.BooleanField(default=False)
@@ -46,9 +47,9 @@ class Task(models.Model):
 
 class Notifications(models.Model):
     PRIORITY_CHOICES = (
-        ('1', 'Every day'),
-        ('2', 'For important task'),
-        ('3', 'No notifications'),
+        ('1', _('Every day')),
+        ('2', _('For important task')),
+        ('3', _('No notifications')),
     )
     priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default=1)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='notifications')

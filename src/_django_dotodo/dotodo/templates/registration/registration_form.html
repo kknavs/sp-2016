@@ -1,7 +1,7 @@
 {% extends "dotodo/base.html" %}
 {% load i18n %}
 {% block head %}
-    <title>doToDo Register</title>
+    <title>{% blocktrans %}doToDo Register{% endblocktrans %}</title>
 {% endblock %}
 
 {% block nav_links %}
@@ -14,7 +14,7 @@
   {{ form.as_p }}
     <br/>
     <input class="button big" type="submit" value="{% trans 'Submit' %}" />
-    <p>By clicking submit you agree to the <a href="{% url 'policy' %}" target="_blank">Terms and Privacy Policy</a>.</p>
+    <p>{% blocktrans %}By clicking submit you agree to the{% endblocktrans %} <a href="{% url 'policy' %}" target="_blank">{% blocktrans %}Terms and Privacy Policy{% endblocktrans %}</a>.</p>
     <br/>
 
 </form>

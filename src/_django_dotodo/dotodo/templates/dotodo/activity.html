@@ -1,22 +1,29 @@
 {% extends "dotodo/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
-    <title>doToDo Activity</title>
+    <title>{% blocktrans %}doToDo Activity{% endblocktrans %}</title>
     <script type="text/javascript" src="{% static 'dotodo/js/activity.js' %}" defer></script>
+    <script src="{% static 'dotodo/js/highcharts.js' %}"></script>
+    {% load chartit %}
+    {{ chart|load_charts:"containerChart" }}
 {% endblock %}
 {% block nav_links %}
     {% include 'dotodo/nav_links/home.html' %}
 {% endblock %}
 
+
+
 {% block main %}
             <section>
 
-                <p id="infoHappy">Today you have done: no js enabled? </p>
-                <img id="imgHappy" src="{% static 'dotodo/images/emo3.svg' %}"  width="200" height="200">
-                <p>Your activity so far (line to top means you have done all task for the day):</p>
+               {% comment %} <p id="infoHappy">{% blocktrans %}Today you have done: no js enabled? {% endblocktrans %}</p>
+                <img id="imgHappy" src="{% static 'dotodo/images/emo3.svg' %}"  width="200" height="200">{% endcomment %}
+                <p>{% blocktrans %}Your activity so far (line to top means you have done all task for the day):{% endblocktrans %}</p>
                 <div class="column">
-                <canvas id="canvas" width="300" height="300">
+                    <div id='containerChart'> Chart will be rendered here </div>
+              {% comment %}  <canvas id="canvas" width="300" height="300">
                     <img src="{% static 'dotodo/images/image_example.png' %}" alt="graph">
                 </canvas>
 
@@ -37,7 +44,7 @@
                         <th>Done tasks (percentage)</th>
                         <td>25</td><td>40</td><td>80</td><td>100</td><td>70</td>
                     </tr>
-                </table>
+                </table>{% endcomment %}
                 </div>
             </section>
 

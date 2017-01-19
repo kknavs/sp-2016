@@ -1,8 +1,9 @@
 {% extends "dotodo/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block head %}
-    <title>doToDo Task</title>
+    <title>{% blocktrans %}doToDo Task{% endblocktrans %}</title>
     <script type="text/javascript" src="{% static 'dotodo/js/task.js' %}" defer></script>
 {% endblock %}
 {% block nav_links %}
@@ -15,10 +16,10 @@
                 <form method="POST"  action="">
                     {% csrf_token %}
                     {{ edit_form.as_p }}
-                    <a href="{% url 'category' %}" target="_blank">Edit categories &#x270F</a>
-                    <input class="button" name="submitTask" id="submitTask"  value="Save task" type="submit" />
+                    <a href="{% url 'category' %}" target="_blank">{% blocktrans %}Edit categories{% endblocktrans %} &#x270F</a>
+                    <input class="button" name="submitTask" id="submitTask"  value={% trans "Save task" %} type="submit" />
                     {% if request.get_full_path != "/task/" %}
-                    <input class="button" name="deleteTask" id="deleteTask"  value="Delete task" type="submit" />
+                    <input class="button" name="deleteTask" id="deleteTask"  value={% trans "Delete task" %} type="submit" />
                     {% endif %}
                 </form>
 

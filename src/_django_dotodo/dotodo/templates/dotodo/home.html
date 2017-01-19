@@ -1,6 +1,7 @@
 {% extends "dotodo/base.html" %}
+{% load i18n %}
 {% block head %}
-    <title>doToDo Home</title>
+    <title>{% blocktrans %}doToDo Home{% endblocktrans %}</title>
 
 {% endblock %}
 
@@ -10,29 +11,38 @@
 
 {% block main %}
             <section>
-                <p class="text big">Make the time.</p>
-                <p>Hello, {{request.user.username}}!</p>
+                <p class="text big">{% blocktrans %}Make the time.{% endblocktrans %}</p>
+                <p>{% blocktrans %}Hello, {{ user }}!{% endblocktrans %}</p>
             </section>
             <section>
                 <div class="rowOrColumn">
-                <div class="tasksDay"><p class="text big">Monday</p>
+{% comment %}                <div class="tasksDay"><p class="text big">Monday</p>
                     <div >    <input id="checkbox-1-1" class="task-checkbox" type="checkbox"   checked="checked" /><label for="checkbox-1-1">Go to shop</label> <a href="task.html" target="_blank">&#x270F</a></div>
                 <div > <input id="checkbox-1-2" class="task-checkbox" type="checkbox"  /><label for="checkbox-1-2">Send email  </label><a href="task.html" target="_blank">&#x270F</a></div>
                 <div > <input id="checkbox-1-3" class="task-checkbox" type="checkbox"  checked="checked"/><label for="checkbox-1-3">Coffee</label><a href="task.html" target="_blank">&#x270F</a></div>
                 <div > <input id="checkbox-1-4" class="task-checkbox" type="checkbox"  checked="checked" /><label for="checkbox-1-4">Learn for seminar</label><a href="task.html" target="_blank">&#x270F</a></div>
                 <div > <input id="checkbox-1-5" class="task-checkbox" type="checkbox"   /><label for="checkbox-1-5">Return keys </label><a href="task.html" target="_blank">&#x270F</a></div>
                     <div class="controls footer">  <a href="task.html" class="button big">Save</a></div>
-                </div>
-                    <div class="tasksDay"><p class="text big">Testtt</p>
+                </div>{% endcomment %}
+
+                    {% for task in tasks %}
+                        {% ifchanged %}    <div class="tasksDay"><p class="text big">{{ task.date}}</p>{% endifchanged %}
+
 {#                        <div> <input type="checkbox" id="checkbox-2-1" class="task-checkbox"  checked="checked" /><label for="checkbox-2-1">Do homework</label><a href="task.html" target="_blank">&#x270F</a></div>#}
-                        {% for task in tasks %}
-                            <div> <input type="checkbox" id="checkbox-2-1" class="task-checkbox"  checked="checked" />
-                                <label for="checkbox-2-1">{{ task.title}}</label><a href="{% url 'task_edit' task.id %}" target="_blank">&#x270F</a></div>
-                        {% endfor %}
 
-                        <div class="controls footer">  <a href="{% url 'home'  %}" class="button big">Save</a></div>
-                    </div>
+                            <div> <input  disabled="disabled" type="checkbox" id="checkbox-{{ task.id}}" class="task-checkbox"
+                                {% if not task.finished %}
+                                          checked="checked"
+                                {% endif %}
+                        />
 
+                                <label for="checkbox-{{ task.id}}">{{ task.title}}</label><a href="{% url 'task_edit' task.id %}" >&#x270F</a></div>
+
+
+{#                        <div class="controls footer">  <a href="{% url 'home'  %}" class="button big">{% trans "Save" %}</a></div>#}
+                    {% ifchanged %}   </div>{% endifchanged %}
+                    {% endfor %}
+                </div>
                 </div>
 
                 {% if is_paginated %}
@@ -59,7 +69,7 @@
 
                 <div class="column">
                     <div>
-                <p class="contact"><label for="showTasks">Show tasks by:</label></p>
+{% comment %}                <p class="contact"><label for="showTasks">{% blocktrans %}Show tasks by:{% endblocktrans %}</label></p>
                 <select name="showTasks" id="showTasks">
                     <!--<option value="1">1 day</option>-->
                     <option selected="selected" value="3">3 days</option>
@@ -71,9 +81,9 @@
                 <form >
                     <div class="row">
                 <input type="search" results=5 autosave=input_search_task_value id="search" placeholder="Search..." />
-                    <input class="button" name="submitSearchTask" id="submitSearchTask"  value="Search" type="submit">
+                    <input class="button" name="submitSearchTask" id="submitSearchTask"  value={% trans "Search" %} type="submit">
                     </div>
-                </form>
+                </form>{% endcomment %}
 
                 </div>
             </section>
